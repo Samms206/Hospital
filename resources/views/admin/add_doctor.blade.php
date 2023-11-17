@@ -33,9 +33,12 @@
                         <div>
                             <x-label style="color: white" for="speciality" value="{{ __('Speciality') }}" />
                             <select style="color: black" name="speciality" id="speciality" class="block mt-1 w-full">
+                                <option value="cardio">Cardio</option>
                                 <option value="skin">Skin</option>
                                 <option value="heart">Heart</option>
                                 <option value="eye">Eye</option>
+                                <option value="nose">Nose</option>
+                                <option value="surgeon">Surgeon</option>
                             </select>
                         </div>
                         <div>
