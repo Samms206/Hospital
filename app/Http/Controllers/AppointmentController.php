@@ -11,7 +11,7 @@ class AppointmentController extends Controller
     public function index(){
         if (Auth::id()) {
             $userid = Auth::user()->id;
-            $appointment = Appointment::findOrFail($userid)->get();
+            $appointment = Appointment::where('user_id',$userid)->get();
             return view('user.my_appointment', ['appointment' => $appointment]);
         }else{
             return redirect()->back();
