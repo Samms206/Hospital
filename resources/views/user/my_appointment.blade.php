@@ -27,7 +27,11 @@
             <td>{{$ap->date}}</td>
             <td>{{$ap->message}}</td>
             <td>{{$ap->status}}</td>
-            <td><a href="{{url('cancel_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel</a></td>
+            @if ($ap->status == 'Approved')
+                <td><a style="background-color: gray; color: white;" @disabled(true) class="btn btn-secondary">Cancel</a></td>
+            @else
+                <td><a href="{{url('cancel_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel</a></td>
+            @endif
         </tr>
         @endforeach
 
