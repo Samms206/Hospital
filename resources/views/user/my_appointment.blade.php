@@ -34,7 +34,6 @@
             @endif
         </tr>
         @endforeach
-
     </table>
 </div>
 
