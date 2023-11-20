@@ -37,6 +37,8 @@ Route::middleware([
 Route::get('/add_doctor_view', [AdminController::class, 'addview']);
 Route::get('/show_doctor', [AdminController::class, 'show_doctor']);
 Route::post('/upload_doctor', [DoctorController::class, 'store']);
+Route::get('/editdoctor/{id}', [DoctorController::class, 'edit']);
+Route::post('/update_doctor/{id}', [DoctorController::class, 'update']);
 Route::get('/deletedoctor/{id}', [DoctorController::class, 'delete']);
 Route::get('/show_appointments', [AdminController::class, 'show_appointments']);
 Route::get('/approved_appoint/{id}', [AdminController::class, 'approved_appointment']);
