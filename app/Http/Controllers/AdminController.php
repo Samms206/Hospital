@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Notifications\SendEmailNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
 {
@@ -24,12 +26,30 @@ class AdminController extends Controller
         $data = Appointment::findOrFail($id);
         $data->status = 'Approved';
         $data->save();
+        //email notification
+        $details = [
+            'greeting' => 'Your Appointment has been approved',
+            'body' => 'You have successfully approved this appointment',
+            'actiontext' => 'View My Appointments',
+            'actionurl' => url('/myappointment'),
+            'endpart' => 'Thank you',
+        ];
+        Notification::send($data, new SendEmailNotification($details));
         return redirect()->back();
     }
     public function canceled_appointment($id){
         $data = Appointment::findOrFail($id);
         $data->status = 'Canceled';
         $data->save();
+        //email notification
+        $details = [
+            'greeting' => 'Your Appointment has been cancelled',
+            'body' => 'Sorry your appointment has been cancelled',
+            'actiontext' => 'View My Appointments',
+            'actionurl' => url('/myappointment'),
+            'endpart' => 'Im Sorry, Thank you',
+        ];
+        Notification::send($data, new SendEmailNotification($details));
         return redirect()->back();
     }
 }

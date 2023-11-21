@@ -35,18 +35,24 @@
                             <td>{{$ap->date}}</td>
                             <td>{{$ap->message}}</td>
                             <td>{{$ap->status}}</td>
-                            <td>
-                                @if ($ap->status == 'Approved')
-                                    <a style="background-color: gray; color: white;" @disabled(true) class="btn btn-secondary">Approve</a>
-                                @else
-                                    <a href="{{url('approved_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-success">Approve</a>
-                                @endif
-                                @if ($ap->status == 'Canceled')
-                                    <a style="background-color: gray; color: white;" @disabled(true) class="btn btn-secondary">Cancel</a>
-                                @else
-                                    <a href="{{url('canceled_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel</a>
-                                @endif
-                            </td>
+                            @if (strtotime($ap->date) < strtotime(date('Y-m-d')))
+                                <td>
+                                    <p style="font-style: italic">*Expired</p>
+                                </td>
+                            @else
+                                <td>
+                                    @if ($ap->status == 'Approved')
+                                        <a style="background-color: gray; color: white;" @disabled(true) class="btn btn-secondary">Approve</a>
+                                    @else
+                                        <a href="{{url('approved_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-success">Approve</a>
+                                    @endif
+                                    @if ($ap->status == 'Canceled')
+                                        <a style="background-color: gray; color: white;" @disabled(true) class="btn btn-secondary">Cancel</a>
+                                    @else
+                                        <a href="{{url('canceled_appoint/'.$ap->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Cancel</a>
+                                    @endif
+                                </td>
+                            @endif
                         </tr>
                         @endforeach
 
